@@ -76,16 +76,15 @@ class ParamsLoader
 
     protected function loadDotEnvFile()
     {
-        if (!class_exists('Dotenv\Dotenv')) {
+        if (!class_exists('\Dotenv')) {
             throw new ConfigurationException(
                 "`vlucas/phpdotenv` library is required to parse .env files.\n" .
                 "Please install it via composer: composer require vlucas/phpdotenv"
             );
-        }
-        $dotEnv = new \Dotenv\Dotenv(codecept_root_dir(), $this->paramStorage);
-        $dotEnv->load();
-        return $_ENV;
-    }
+         }
+         \Dotenv::load(codecept_root_dir(), $this->paramStorage);
+         return $_ENV;
+     }
 
     protected function loadEnvironmentVars()
     {
